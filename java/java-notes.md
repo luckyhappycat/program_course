@@ -111,5 +111,200 @@ Java里方法的参数传递只有一种：值传递。
 
 Java对于引用类型的参数传递，同样是采用值传递。
 
+### 可变长度的形参
 
+和其他语言一样，可变形参只能位于形参列表的最后。
+
+```java
+public class VarArgs {
+    public static void test(int a, String... books) {
+        for (var tmp : books) {
+            System.out.println(tmp);
+        }
+        System.out.println(a);
+    }
+
+    public static void main(String[] args) {
+        test(1, "hello", "world");
+    }
+}
+```
+
+### 递归
+
+略。
+
+### 方法重载
+
+一个类中包含两个或两个以上的方法，方法名相同，但形参列表不同。
+
+注意：返回值类型不能用于区分重载的方法。
+
+可变长度的形参也支持重载，但是不建议这么做。
+
+### 成员变量和局部变量
+
+所有变量：
+
+- 成员变量
+  - 实例变量（非static）
+  - 类变量（static）
+- 局部变量
+  - 形参
+  - 方法局部变量（在方法内定义）
+  - 代码块局部变量（在代码块定义）
+
+#### 成员变量的初始化和内存中的运行机制
+
+```java
+class Person {
+    public String name;
+    public static int eyeNum;
+}
+public class PersonTest {
+    public static void main(String[] args) {
+        //初始化后，eyeNum=0
+        Person p1 = new Person();
+        Person p2 = new Person();
+        p1.name = "张三";
+        p2.name = "孙悟空";
+        p1.eyeNum = 2;
+        p2.eyeNum = 3;
+    }
+}
+```
+
+第一次使用Person类时加载并初始化Person类，此时堆内存中eyeNum=0。
+
+Person p1 = new Person(); 将Person对象赋值给p1，并为name实例变量分配内存，给定初始值null。
+
+#### 局部变量的初始化和内存中的运行机制
+
+用完就回收。
+
+## 封装和隐藏
+
+封装指的是将对象的状态信息隐藏在对象内部，不允许外部程序直接访问对象内部的信息，而是通过该类所提供的方法来实现对内部信息的操作和访问。
+
+封装是为了把该隐藏的隐藏，把该暴露的暴露。
+
+### 访问控制符
+
+访问控制符的级别：
+
+```
+private < default < protected < public
+```
+
+- private（**当前类访问权限**）：如果类里的一个成员（包括成员变量、方法和构造器等）使用private访问控制符来修饰，则这个成员只能在当前类的内部被访问。很显然，这个访问控制符用于修饰成员变量最合适，使用它来修饰成员变量就可以把成员变量隐藏在该类的内部。
+- default（**包访问权限**）：如果类里的一个成员（包括成员变量、方法和构造器等）或者一个外部类不使用任何访问控制符修饰，就称它是包访问权限的，default访问控制的成员或外部类可以被相同包下的其他类访问。
+-  protected（**子类访问权限**）：如果一个成员（包括成员变量、方法和构造器等）使用protected访问控制符修饰，那么这个成员既可以被同一个包中的其他类访问，也可以被不同包中的子类访问。在通常情况下，如果使用protected来修饰一个方法，通常是希望其子类来重写这个方法。
+- public（**公共访问权限**）：这是一个最宽松的访问控制级别，如果一个成员（包括成员变量、方法和构造器等）或者一个外部类使用public访问控制符修饰，那么这个成员或外部类就可以被所有类访问，不管访问类和被访问类是否处于同一个包中，是否具有父子继承关系。
+
+访问控制级别表：
+
+|            | private | default | protected | public |
+| ---------- | ------- | ------- | --------- | ------ |
+| 同一个类中 | √       | √       | √         | √      |
+| 同一个包中 |         | √       | √         | √      |
+| 子类中     |         |         | √         | √      |
+| 全局范围内 |         |         |           | √      |
+
+如果一个Java源文件里定义的所有类都没有使用public修饰，则这个Java源文件的文件名可以是一切合法的文件名；但如果一个Java源文件里定义了一个public修饰的类，则这个源文件的文件名必须与public修饰的类的类名相同。
+
+一个类通常是一个小模块，模块设计应当追求高内聚（尽可能把模块的内部数据、功能实现细节隐藏在模块内部独立完成，不允许外部直接干预）、低耦合（仅暴露少量的方法给外部使用）
+
+关于访问控制符的使用，存在如下几条基本原则。
+
+- 类里的绝大部分成员变量都应该使用private修饰，只有一些static修饰的、类似全局变量的成员变量，才可能考虑使用public修饰。除此之外，有些方法只用于辅助实现该类的其他方法，这些方法被称为工具方法，工具方法也应该使用private修饰。
+- 如果某个类主要用做其他类的父类，该类里包含的大部分方法可能仅希望被其子类重写，而不想被外界直接调用，则应该使用protected修饰这些方法。
+- 希望暴露出来给其他类自由调用的方法应该使用public修饰。因此，类的构造器通过使用public修饰，从而允许在其他地方创建该类的实例。因为外部类通常都希望被其他类自由使用，所以大部分外部类都使用public修饰。
+
+### package, import和import static
+
+package：包
+
+import：导包（导入类），可以省略写包名
+
+import static：导包（导入指定类的某个静态成员变量、方法或全部的静态成员变量、方法），可以连类名都省略
+
+## 构造方法
+
+如果不写构造方法，系统会自动创建一个空的构造方法。
+
+如果写了构造方法，系统则不会自动创建构造方法。
+
+构造方法可以重载。
+
+```java
+public class Constructor {
+    public String name;
+    public int size;
+
+    public Constructor(String name) {
+        this.name = name;
+    }
+
+    public Constructor(String name, int size) {
+        this(name);
+        this.size = size;
+    }
+}
+```
+
+## 继承
+
+### 继承的特点
+
+继承通过extends关键字实现。
+
+子类不能获得父类的构造函数。
+
+Java中没有多继承。
+
+Java中只能有一个直接父类，可以有无限多个间接父类。
+
+java.lang.Object类时所有类的父类。
+
+```java
+public class Fruit {
+    public double weight;
+
+    public void info() {
+        System.out.println("Fruit, weight: " + weight);
+    }
+}
+
+public class Apple extends Fruit {
+    public static void main(String[] args) {
+        var a = new Apple();
+        a.weight = 56;
+        a.info();
+    }
+}
+```
+
+### 重写父类方法
+
+```java
+public class Fruit {
+    public double weight;
+
+    public void info() {
+        System.out.println("Fruit, weight: " + weight);
+    }
+}
+
+public class AppleOverride extends Fruit {
+    public void info() {
+        System.out.println("Apple, weight: " + weight);
+    }
+
+    public static void main(String[] args) {
+        var a = new AppleOverride();
+        a.weight = 56;
+        a.info();
+    }
+}
+```
 
