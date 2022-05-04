@@ -1,4 +1,4 @@
-package com.crazy.java.ch13MySQL数据库与JDBC编程.SQL语法132;
+package com.crazy.java.ch13MySQL数据库与JDBC编程.s132SQL语法;
 import java.awt.*;
 import javax.swing.*;
 import java.util.*;

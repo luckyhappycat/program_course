@@ -1,8 +1,8 @@
-package com.crazy.java.ch13MySQL数据库与JDBC编程.SQL语法132;
+package com.crazy.java.ch13MySQL数据库与JDBC编程.s132SQL语法;
 import java.util.*;
 import java.io.*;
 import java.sql.*;
-public class ExecuteDDL {
+public class ExecuteDML {
     private String driver;
     private String url;
     private String user;
@@ -16,7 +16,7 @@ public class ExecuteDDL {
         user = props.getProperty("user");
         pass = props.getProperty("pass");
     }
-    public void createTable(String sql) throws Exception {
+    public int insertData(String sql) throws Exception {
         // 加载驱动
         Class.forName(driver);
         try (
@@ -24,17 +24,17 @@ public class ExecuteDDL {
                 Connection conn = DriverManager.getConnection(url, user, pass);
                 // 使用Connection来创建一个Statment对象
                 Statement stmt = conn.createStatement()) {
-            // 执行DDL,创建数据表
-            stmt.executeUpdate(sql);
+            // 执行DML,返回受影响的记录条数
+            return stmt.executeUpdate(sql);
         }
     }
     public static void main(String[] args) throws Exception {
-        var ed = new ExecuteDDL();
+        var ed = new ExecuteDML();
         ed.initParam("mysql.ini");
-        ed.createTable("create table jdbc_test "
-                + "( jdbc_id int auto_increment primary key, "
-                + "jdbc_name varchar(255), "
-                + "jdbc_desc text);");
-        System.out.println("-----建表成功-----");
+        int result = ed.insertData("insert into jdbc_test(jdbc_name, jdbc_desc)"
+                + "select s.student_name, t.teacher_name "
+                + "from student_table s, teacher_table t "
+                + "where s.java_teacher = t.teacher_id;");
+        System.out.println("--系统中共有" + result + "条记录受影响--");
     }
 }

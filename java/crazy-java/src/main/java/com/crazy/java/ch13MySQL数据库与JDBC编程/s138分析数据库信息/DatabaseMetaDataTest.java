@@ -1,4 +1,4 @@
-package com.crazy.java.ch13MySQL数据库与JDBC编程.分析数据库信息138;
+package com.crazy.java.ch13MySQL数据库与JDBC编程.s138分析数据库信息;
 import java.sql.*;
 import java.util.*;
 import java.io.*;

@@ -1,4 +1,4 @@
-package com.crazy.java.ch13MySQL数据库与JDBC编程.JDBC42常用接口和类简介133;
+package com.crazy.java.ch13MySQL数据库与JDBC编程.s133JDBC42常用接口和类简介;
 import java.sql.*;
 public class ConnMySql {
     public static void main(String[] args) throws Exception {

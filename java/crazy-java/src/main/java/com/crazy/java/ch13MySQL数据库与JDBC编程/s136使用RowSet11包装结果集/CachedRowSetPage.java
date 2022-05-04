@@ -1,4 +1,4 @@
-package com.crazy.java.ch13MySQL数据库与JDBC编程.使用RowSet11包装结果集136;
+package com.crazy.java.ch13MySQL数据库与JDBC编程.s136使用RowSet11包装结果集;
 import java.util.*;
 import java.io.*;
 import java.sql.*;

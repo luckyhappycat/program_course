@@ -1,4 +1,4 @@
-package com.crazy.java.ch13MySQL数据库与JDBC编程.管理结果集135;
+package com.crazy.java.ch13MySQL数据库与JDBC编程.s135管理结果集;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
