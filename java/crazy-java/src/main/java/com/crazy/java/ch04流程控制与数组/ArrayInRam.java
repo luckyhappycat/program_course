@@ -5,13 +5,10 @@ public class ArrayInRam {
         int[] a = {5, 7, 20};
         // 动态初始化
         var b = new int[4];
-        // 输出b数组的长度
         System.out.println("b数组的长度为：" + b.length);
-        // 循环输出a数组的元素
         for (int i = 0, len = a.length; i < len; i++) {
             System.out.println(a[i]);
         }
-        // 循环输出b数组的元素
         for (int i = 0, len = b.length; i < len; i++) {
             System.out.println(b[i]);
         }

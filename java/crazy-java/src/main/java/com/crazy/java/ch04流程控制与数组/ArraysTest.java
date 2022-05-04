@@ -2,9 +2,7 @@ package com.crazy.java.ch04流程控制与数组;
 import java.util.Arrays;
 public class ArraysTest {
     public static void main(String[] args) {
-        // 定义一个a数组
         var a = new int[]{3, 4, 5, 6};
-        // 定义一个a2数组
         var a2 = new int[]{3, 4, 5, 6};
         // a数组和a2数组的长度相等，每个元素依次相等，将输出true
         System.out.println("a数组和a2数组是否相等：" + Arrays.equals(a, a2));
