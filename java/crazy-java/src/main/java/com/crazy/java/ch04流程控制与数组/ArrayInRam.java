@@ -1,9 +1,9 @@
 package com.crazy.java.ch04流程控制与数组;
 public class ArrayInRam {
     public static void main(String[] args) {
-        // 定义并初始化数组，使用静态初始化
+        // 静态初始化
         int[] a = {5, 7, 20};
-        // 定义并初始化数组，使用动态初始化
+        // 动态初始化
         var b = new int[4];
         // 输出b数组的长度
         System.out.println("b数组的长度为：" + b.length);
