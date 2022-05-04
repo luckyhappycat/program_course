@@ -1,4 +1,4 @@
-package com.crazy.java.ch14注解Annotation.编译时处理注解144;
+package com.crazy.java.ch14注解Annotation.s144编译时处理注解;
 import java.lang.annotation.*;
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.SOURCE)

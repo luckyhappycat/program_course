@@ -1,4 +1,4 @@
-package com.crazy.java.ch14注解Annotation.编译时处理注解144;
+package com.crazy.java.ch14注解Annotation.s144编译时处理注解;
 
 import javax.annotation.processing.*;
 import javax.lang.model.element.*;

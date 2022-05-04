@@ -1,4 +1,4 @@
-package com.crazy.java.ch14注解Annotation.编译时处理注解144;
+package com.crazy.java.ch14注解Annotation.s144编译时处理注解;
 @Persistent(table = "person_inf")
 public class Person {
     @Id(column = "person_id", type = "integer", generator = "identity")

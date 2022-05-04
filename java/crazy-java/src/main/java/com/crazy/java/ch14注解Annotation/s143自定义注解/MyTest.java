@@ -1,4 +1,4 @@
-package com.crazy.java.ch14注解Annotation.自定义注解143;
+package com.crazy.java.ch14注解Annotation.s143自定义注解;
 
 public class MyTest {
     // 使用@Testable注解指定该方法是可测试的

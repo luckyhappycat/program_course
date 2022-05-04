@@ -1,4 +1,4 @@
-package com.crazy.java.ch14注解Annotation.自定义注解143;
+package com.crazy.java.ch14注解Annotation.s143自定义注解;
 /**
  * @author mzk
  */

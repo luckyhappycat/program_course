@@ -1,4 +1,4 @@
-package com.crazy.java.ch14注解Annotation.基本注解141;
+package com.crazy.java.ch14注解Annotation.s141基本注解;
 
 class Apple1 {
     /**

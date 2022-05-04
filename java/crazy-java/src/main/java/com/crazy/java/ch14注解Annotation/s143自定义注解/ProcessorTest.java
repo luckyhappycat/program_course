@@ -1,4 +1,4 @@
-package com.crazy.java.ch14注解Annotation.自定义注解143;
+package com.crazy.java.ch14注解Annotation.s143自定义注解;
 import java.lang.reflect.*;
 public class ProcessorTest {
     public static void process(String clazz) throws ClassNotFoundException {

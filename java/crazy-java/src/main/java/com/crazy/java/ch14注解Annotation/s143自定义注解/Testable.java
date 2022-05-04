@@ -1,4 +1,4 @@
-package com.crazy.java.ch14注解Annotation.自定义注解143;
+package com.crazy.java.ch14注解Annotation.s143自定义注解;
 import java.lang.annotation.*;
 // 使@Retention指定注解的保留到运行时
 @Retention(RetentionPolicy.RUNTIME)
