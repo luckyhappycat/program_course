@@ -308,3 +308,112 @@ public class AppleOverride extends Fruit {
 }
 ```
 
+方法的重写要遵循“两同两小一大”规则:
+
+- “两同”即方法名相同、形参列表相同；
+- “两小”指的是子类方法返回值类型应比父类方法返回值类型更小或相等，子类方法声明抛出的异常类应比父类方法声明抛出的异常类更小或相等；
+- “一大”指的是子类方法的访问权限应比父类方法的访问权限更大或相等。
+
+覆盖方法和被覆盖方法要么都是类方法，要么都是实例方法，不能一个是类方法，一个是实例方法。
+
+子类无法重写父类的private方法，因为访问不到。
+
+重载是overload，重写是overwrite。
+
+重载发生在一个类中的同名方法，重写发生在父类和子类的同名方法。
+
+子类中也可以重载父类的方法。
+
+### super限定
+
+如果需要在子类中调用父类中被重写的实例方法，可以使用super限定。
+
+super不能出现在子类的static方法中。（static方法属于类，该方法的调用者可能是一个类，而不是对象，因而super限定也就失去了意义。）
+
+### 调用父类的构造方法
+
+子类不会获得父类的构造方法，但是子类可以调用父类的构造方法。
+
+在同一个类中，一个构造方法调用另一个重载的构造方法通过this完成。
+
+在父类和子类中，子类构造方法调用父类的构造方法通过super完成。使用super调用父类的构造方法必须在子类构造方法的第一行。
+
+不管子类构造方法中是否显式使用super调用，子类构造方法都会调用父类的构造方法。
+
+如果C继承自B，B继承自A，那么初始化C时，先初始化A，再初始化B，再初始化C。
+
+## 多态
+
+### 多态性
+
+Java引用变量有两个类型：一个是编译时类型，一个是运行时类型。
+
+编译时类型由声明该变量时使用的类型决定，运行时类型由实际赋给该变量的对象决定。
+
+如果编译时类型和运行时类型不一致，就可能出现多态（Polymorphism）。
+
+实例方法有多态性，实例变量没有多态性。
+
+```java
+class BaseClass {
+    public int book = 6;
+
+    public void base() {
+        System.out.println("BaseClass::base()");
+    }
+
+    public void test() {
+        System.out.println("BaseClass::test()");
+    }
+}
+
+public class SubClass extends BaseClass {
+    // 隐藏父类的book
+    public String book = "SubClass book";
+
+    // 重写父类的test
+    public void test() {
+        System.out.println("SubClass::test()");
+    }
+
+    public void sub() {
+        System.out.println("SubClass::sub()");
+    }
+
+    public static void main(String[] args) {
+        //父类
+        BaseClass bc = new BaseClass();
+        System.out.println(bc.book); // 6
+        bc.base();
+        bc.test();
+        //子类
+        SubClass sc = new SubClass();
+        System.out.println(sc.book);
+        sc.base(); // 调用父类方法
+        sc.test(); // 调用子类重写的方法
+
+        // 多态，编译时类型和运行时类型不一样
+        BaseClass ploymophicBc = new SubClass();
+        System.out.println(ploymophicBc.book); // 父类的book
+        ploymophicBc.base(); // 父类的base()
+        ploymophicBc.test(); // 子类的test()
+        // 因为ploymophicBc的编译类型是BaseClass，
+        // BaseClass类没有提供sub方法,所以下面代码编译时会出现错误。
+        // ploymophicBc.sub();
+        // 编译器推断v1是SubClass类型
+        var v1 = new SubClass();
+        // 由于ploymophicBc的编译时类型是BaseClass
+        // 因此编译器推断v2是BaseClass类型
+        var v2 = ploymophicBc;
+        // 由于BaseClass类没有提供sub方法,所以下面代码编译时会出现错误。
+        // v2.sub();
+    }
+}
+```
+
+引用变量在编译阶段只能调用其编译时类型所具有的方法，但运行时则执行它运行时类型所具有的方法。
+
+通过引用变量访问其包含的实例变量时，访问的是编译时定义的成员变量，而不是运行时定义的成员变量。
+
+### 引用变量的强制类型转换
+
