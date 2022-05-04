@@ -6,16 +6,16 @@ class BaseClass {
         System.out.println("父类的普通方法");
     }
     public void test() {
-        System.out.println("父类的被覆盖的方法");
+        System.out.println("父类的被重写的方法");
     }
 }
 
 public class SubClass extends BaseClass {
-    //重新定义一个book实例变量隐藏父类的book实例变量
+    // 隐藏父类的book
     public String book = "轻量级Java EE企业应用实战";
 
     public void test() {
-        System.out.println("子类的覆盖父类的方法");
+        System.out.println("子类重写父类方法");
     }
 
     public void sub() {
